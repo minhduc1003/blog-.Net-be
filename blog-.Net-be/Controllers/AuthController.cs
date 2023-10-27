@@ -46,7 +46,7 @@ namespace blog_.Net_be.Controllers
         }
         [HttpPost]
         [Route("Login")]
-        public async Task<IActionResult> Login([FromBody] LoginDto login)
+        public async Task<IActionResult> Login([FromForm] LoginDto login)
         {
            var user = await userManager.FindByEmailAsync(login.Email);
             if(user != null)
@@ -67,7 +67,7 @@ namespace blog_.Net_be.Controllers
                 } 
                 
             }
-            return BadRequest("something went wrong");
+            return BadRequest("Password or email invalid");
 
         }
     }
