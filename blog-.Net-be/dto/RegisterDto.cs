@@ -12,6 +12,5 @@ namespace blog_.Net_be.dto
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        public string[] Roles { get; set; }
     }
 }

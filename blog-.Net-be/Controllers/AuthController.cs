@@ -31,14 +31,13 @@ namespace blog_.Net_be.Controllers
             var rs = await userManager.CreateAsync(identityUser, register.Password);
             if (rs.Succeeded)
             {
-                if(register.Roles != null&& register.Roles.Any())
-                {
-                  rs = await userManager.AddToRolesAsync(identityUser, register.Roles);
+                 string role = "user";
+                  rs = await userManager.AddToRolesAsync(identityUser, new[] {"user"});
                     if(rs.Succeeded)
                     {
                        return Ok("user was registered");
                     }
-                }
+                
             }
             
             return BadRequest("something went wrong");
@@ -46,7 +45,7 @@ namespace blog_.Net_be.Controllers
         }
         [HttpPost]
         [Route("Login")]
-        public async Task<IActionResult> Login([FromForm] LoginDto login)
+        public async Task<IActionResult> Login([FromBody] LoginDto login)
         {
            var user = await userManager.FindByEmailAsync(login.Email);
             if(user != null)
