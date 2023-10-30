@@ -3,6 +3,7 @@ using blog_.Net_be.data;
 using blog_.Net_be.mapper;
 using blog_.Net_be.Models;
 using blog_.Net_be.Repositories;
+using blog_.Net_be.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<BlogDbContext>(option=>option.UseSqlServer(builder.Configuration.GetConnectionString("BlogConnectString")));
 builder.Services.AddDbContext<AuthDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("AuthConnectString")));
-builder.Services.AddIdentityCore<IdentityUser>().AddRoles<IdentityRole>().AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("Blog").AddEntityFrameworkStores<AuthDbContext>().AddDefaultTokenProviders();
+builder.Services.AddIdentityCore<UserConfig>().AddRoles<IdentityRole>().AddTokenProvider<DataProtectorTokenProvider<UserConfig>>("Blog").AddEntityFrameworkStores<AuthDbContext>().AddDefaultTokenProviders();
 builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequireDigit = false;

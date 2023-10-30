@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using blog_.Net_be.Utils;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace blog_.Net_be.data
 {
-    public class AuthDbContext:IdentityDbContext
+    public class AuthDbContext : IdentityDbContext<UserConfig>
     {
         public AuthDbContext(DbContextOptions<AuthDbContext> options ) :base(options) 
         {

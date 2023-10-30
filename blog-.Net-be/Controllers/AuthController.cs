@@ -1,5 +1,6 @@
 ﻿using blog_.Net_be.CustomRepositories;
 using blog_.Net_be.dto;
+using blog_.Net_be.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,10 @@ namespace blog_.Net_be.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<UserConfig> userManager;
         private readonly ITokenRepository tokenRepository;
 
-        public AuthController(UserManager<IdentityUser> userManager,ITokenRepository tokenRepository)
+        public AuthController(UserManager<UserConfig> userManager,ITokenRepository tokenRepository)
         {
          
             this.userManager = userManager;
@@ -23,8 +24,9 @@ namespace blog_.Net_be.Controllers
         [Route("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto register) 
         {
-            var identityUser = new IdentityUser
+            var identityUser = new UserConfig
             {
+                FullName = register.FullName,
                 UserName = register.UserName,
                 Email = register.Email,
             };

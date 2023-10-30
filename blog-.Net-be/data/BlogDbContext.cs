@@ -11,6 +11,7 @@ namespace blog_.Net_be.data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Blog>().Navigation(c => c.Category).AutoInclude();
+            modelBuilder.Entity<Blog>().Navigation(c=>c.Image).AutoInclude();
             modelBuilder.Entity<Blog>().Property(b => b.CreatedDate).HasDefaultValueSql("getdate()");
 
         }

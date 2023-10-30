@@ -5,6 +5,8 @@ namespace blog_.Net_be.dto
     public class RegisterDto
     {
         [Required]
+        public string FullName { get; set; }
+        [Required]
         public string UserName { get; set; }
         [Required]
         [DataType(DataType.Password)]

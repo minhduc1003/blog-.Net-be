@@ -8,5 +8,6 @@ namespace blog_.Net_be.dto
         public string Description { get; set; }
         public string Author { get; set; }
         public Guid CategoryId { get; set; }
+        public Guid ImageId { get; set; }
     }
 }

@@ -31,8 +31,8 @@ namespace blog_.Net_be.Controllers
                     FileName = imageDto.FormFile.FileName,
                     FileSizeInByte = imageDto.FormFile.Length
                 };
-                await imageUpload.Upload(image);
-                return Ok("upload successfully");
+               var rs = await imageUpload.Upload(image);
+                return Ok(rs);
             }
 
             return BadRequest(ModelState);

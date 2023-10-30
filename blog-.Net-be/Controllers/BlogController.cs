@@ -11,7 +11,7 @@ namespace blog_.Net_be.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+  /*  [Authorize]*/
     public class BlogController : ControllerBase
     {
         private readonly UnitOfWork _unitOfWork;

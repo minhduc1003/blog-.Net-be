@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace blog_.Net_be.Migrations.AuthDb
 {
     /// <inheritdoc />
-    public partial class createauthdb : Migration
+    public partial class initauthdb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

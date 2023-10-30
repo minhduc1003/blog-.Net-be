@@ -12,8 +12,8 @@ using blog_.Net_be.data;
 namespace blog_.Net_be.Migrations.AuthDb
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20231026173342_create auth db")]
-    partial class createauthdb
+    [Migration("20231030022551_init auth db")]
+    partial class initauthdb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
