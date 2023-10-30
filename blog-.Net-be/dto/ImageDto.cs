@@ -3,7 +3,7 @@
     public class ImageDto
     {
         public IFormFile FormFile { get; set; }
-        public string FileName { get; set; }
+        public string? FileName { get; set; }
         public string? FileDescription { get; set; }
     }
 }
