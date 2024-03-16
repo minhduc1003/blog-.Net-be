@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using blog_.Net_be.CustomRepositories;
+using blog_.Net_be.data;
 using blog_.Net_be.dto;
 using blog_.Net_be.Models;
 using blog_.Net_be.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace blog_.Net_be.Controllers
 {
@@ -17,11 +19,13 @@ namespace blog_.Net_be.Controllers
         private readonly UnitOfWork _unitOfWork;
         private readonly IMapper mapper;
         private readonly IBlogRepository blogRepository;
-        public BlogController(UnitOfWork unitOfWork,IMapper mapper,IBlogRepository _blogRepository)
+        private readonly BlogDbContext _context;
+        public BlogController(UnitOfWork unitOfWork,IMapper mapper,IBlogRepository _blogRepository, BlogDbContext context)
         {
             _unitOfWork = unitOfWork;
             this.mapper = mapper;
             blogRepository = _blogRepository;
+            _context = context;
         }
         [HttpGet]
         public async Task<IActionResult> GetAll()
@@ -34,6 +38,21 @@ namespace blog_.Net_be.Controllers
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var rs = await _unitOfWork.BlogRepository.findById(id);
+            return Ok(rs);
+        }
+        [HttpGet]
+        [Route("findCategory/{id}")]
+        public async Task<IActionResult> GetByCategoryId([FromRoute] Guid id)
+        {
+            var rs = await _context.Blogs
+                 .Where(p => p.CategoryId == id)
+                 .ToListAsync();
+
+            if (rs == null)
+            {
+                return NotFound();
+            }
+
             return Ok(rs);
         }
         [HttpPost]
