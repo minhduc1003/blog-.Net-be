@@ -37,7 +37,7 @@ namespace blog_.Net_be.Controllers
                   rs = await userManager.AddToRolesAsync(identityUser, new[] {"user"});
                     if(rs.Succeeded)
                     {
-                       return Ok("user was registered");
+                       return Ok();
                     }
                 
             }
