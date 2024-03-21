@@ -1,5 +1,7 @@
 ﻿using blog_.Net_be.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace blog_.Net_be.data
 {
@@ -7,6 +9,12 @@ namespace blog_.Net_be.data
     {
         public BlogDbContext(DbContextOptions<BlogDbContext> options) : base(options)
         {
+            var databaseCreator = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
+            if(databaseCreator != null)
+            {
+                if (!databaseCreator.CanConnect()) databaseCreator.Create();
+                if (!databaseCreator.HasTables()) databaseCreator.CreateTables();
+            }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
