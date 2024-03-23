@@ -1,0 +1,46 @@
+version: '3.4'
+networks:
+    mynetwork:   
+
+services:
+   blogappdb1:
+        container_name: app-db1
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        ports:
+            - 8002:1433
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=ducDB123434@ 
+            - MSSQL_PID=Express
+        networks:
+            - mynetwork
+   blogappdb2:
+        container_name: app-db2
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        ports:
+            - 8003:1433
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=ducDB123434@ 
+            - MSSQL_PID=Express
+        networks:
+            - mynetwork
+   blog-.net-be:
+    container_name: blog-api
+    image: ${DOCKER_REGISTRY-}blognetbe
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+    build:
+      context: .
+      dockerfile: blog-.Net-be/Dockerfile
+    ports:
+        - 9001:80
+    volumes:
+      - ~/.aspnet/https:/root/.aspnet/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+    depends_on:
+        - blogappdb1
+        - blogappdb2
+    command: tail -f /dev/null to you compose 
+    networks:
+        - mynetwork
