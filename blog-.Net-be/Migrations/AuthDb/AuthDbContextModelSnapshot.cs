@@ -240,6 +240,21 @@ namespace blog_.Net_be.Migrations.AuthDb
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("blog_.Net_be.dto.CurrentUserDto", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("CurrentUser", (string)null);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)

@@ -80,5 +80,20 @@ namespace blog_.Net_be.Controllers
             
             return Ok(rs);
         }
+        [HttpGet]
+        [Route("GetByUserCreated/{id}")]
+        public async Task<IActionResult> GetByUserCreated([FromRoute] string id)
+        {
+            var rs = await _context.Blogs
+                 .Where(p => p.AuthorId == id)
+                 .ToListAsync();
+
+            if (rs == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(rs);
+        }
     }
 }

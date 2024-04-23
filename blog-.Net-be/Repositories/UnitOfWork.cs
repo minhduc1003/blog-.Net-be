@@ -8,9 +8,12 @@ namespace blog_.Net_be.Repositories
         public BlogDbContext DbContext { get;  }
         public IRepositories<Blog> BlogRepository { get;  }
         public IRepositories<Category> CategoryRepository { get;  }
-        public UnitOfWork(BlogDbContext context, IRepositories<Blog> blog, IRepositories<Category> category) { 
+        public IRepositories<Author> AuthorRepository { get; }
+
+        public UnitOfWork(BlogDbContext context, IRepositories<Blog> blog, IRepositories<Category> category, IRepositories<Author> author) { 
             DbContext = context;
             BlogRepository = blog;
+            AuthorRepository = author;
             CategoryRepository = category;
             BlogRepository.DbContext = DbContext;
             CategoryRepository.DbContext = DbContext;

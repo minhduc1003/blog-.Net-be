@@ -37,6 +37,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredUniqueChars = 1;
 });
 builder.Services.AddScoped<IRepositories<Blog>, Repositories<Blog>>();
+builder.Services.AddScoped<IRepositories<Author>, Repositories<Author>>();
 builder.Services.AddScoped<IRepositories<Category>, Repositories<Category>>();
 builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 builder.Services.AddScoped<UnitOfWork>();
